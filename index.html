@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Mars Rover Photo Gallery</title>
+    <!-- Google Fonts for a futuristic look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>Mars Rover Photo Gallery</h1>
+        <p>Explore the Martian surface through the eyes of NASA's rovers.</p>
+    </header>
+
+    <main class="content-area">
+        <div class="controls-container">
+            <!-- Rover Selection -->
+            <div class="control-group">
+                <label for="rover-select">Select a Rover:</label>
+                <select id="rover-select">
+                    <option value="curiosity">Curiosity</option>
+                    <option value="opportunity">Opportunity</option>
+                    <option value="spirit">Spirit</option>
+                </select>
+            </div>
+            
+            <!-- Camera Selection -->
+            <div class="control-group">
+                <label for="camera-select">Select a Camera:</label>
+                <select id="camera-select">
+                    <!-- Options will be dynamically populated by JavaScript -->
+                    <option value="">All Cameras</option>
+                </select>
+            </div>
+            
+            <!-- Martian Day (Sol) Input -->
+            <div class="control-group">
+                <label for="sol-input">Martian Sol (Day):</label>
+                <input type="number" id="sol-input" min="0" value="1000">
+            </div>
+
+            <!-- Fetch Button -->
+            <button id="fetch-button">Get Photos</button>
+        </div>
+
+        <!-- Manifest/Guide Section -->
+        <div class="manifest-container">
+            <h2 class="manifest-toggle">
+                Available Photos Guide <span id="toggle-icon">▼</span>
+            </h2>
+            <div id="manifest-content" class="manifest-content">
+                <div id="manifest-loading" class="manifest-loading">Loading...</div>
+                <ul id="manifest-list" class="manifest-list"></ul>
+            </div>
+        </div>
+
+        <div id="error-message-container" style="display: none;"></div>
+        
+        <div id="gallery-container">
+            <!-- Loading Skeleton -->
+            <div id="loading-skeleton" class="gallery-grid">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+            
+            <!-- Photo grid will be dynamically populated here -->
+            <div class="gallery-grid" id="photo-gallery"></div>
+        </div>
+    </main>
+    
+    <!-- Photo Zoom Modal -->
+    <div id="photo-modal" class="photo-modal">
+        <span class="close-btn">&times;</span>
+        <img id="modal-image" class="modal-image" src="" alt="Zoomed Mars Rover Photo">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
