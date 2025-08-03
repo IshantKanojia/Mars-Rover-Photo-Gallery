@@ -1,0 +1,395 @@
+/*
+ * NASA Mars Rover Photo Gallery Stylesheet
+ * ========================================
+ * A dark, space-themed aesthetic with a responsive design and futuristic styling.
+ */
+
+/* === CSS Custom Properties === */
+:root {
+    --bg-color: #0d1117;
+    --primary-text-color: #c9d1d9;
+    --secondary-text-color: #8b949e;
+    --panel-bg: #161b22;
+    --border-color: #30363d;
+    --accent-blue: #3b82f6;
+    --accent-blue-dark: #2563eb;
+    --accent-orange: #f59e0b; /* New accent color */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Space Mono', monospace;
+}
+
+/* === Base Styles === */
+body {
+    font-family: var(--font-body);
+    /* Updated background with an animated gradient for a more dynamic feel */
+    background: linear-gradient(180deg, #0d1117 0%, #1a2233 100%);
+    background-size: 100% 200%;
+    animation: space-pan 60s linear infinite alternate;
+    color: var(--primary-text-color);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Background animation keyframes */
+@keyframes space-pan {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+/* === Header === */
+.app-header {
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.app-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 6vw, 3rem);
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-orange);
+    text-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+}
+
+.app-header p {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    color: var(--secondary-text-color);
+    font-style: italic;
+    margin: 0.5rem 0 0 0;
+}
+
+/* === Main Content Area === */
+.content-area {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem 2rem;
+}
+
+/* === Controls and Form === */
+.controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-items: flex-start;
+}
+
+.control-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.controls-container select,
+.controls-container input[type="number"] {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--primary-text-color);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    min-width: 150px;
+}
+
+.controls-container select:hover,
+.controls-container input[type="number"]:hover {
+    border-color: var(--accent-blue);
+}
+
+.controls-container select:focus,
+.controls-container input[type="number"]:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Hide arrow for number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#fetch-button {
+    background: linear-gradient(45deg, var(--accent-blue), var(--accent-blue-dark));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 2rem;
+    flex: 0 1 auto;
+}
+
+#fetch-button:hover {
+    background: linear-gradient(45deg, var(--accent-blue-dark), var(--accent-blue));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+#fetch-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#fetch-button:disabled {
+    background: #444;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* === Manifest/Guide Section === */
+.manifest-container {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.manifest-toggle {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.manifest-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-top: 0;
+}
+
+.manifest-content.active {
+    max-height: 500px;
+    padding-top: 1rem;
+    transition: max-height 0.5s ease-in;
+}
+
+.manifest-loading {
+    text-align: center;
+    color: var(--secondary-text-color);
+}
+
+.manifest-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.manifest-list-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.manifest-list-item:hover {
+    background-color: #21262d;
+}
+
+/* === Gallery Grid === */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.photo-card {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Use animation delay for staggered effect */
+.photo-card:nth-child(1) { animation-delay: 0.1s; }
+.photo-card:nth-child(2) { animation-delay: 0.2s; }
+.photo-card:nth-child(3) { animation-delay: 0.3s; }
+.photo-card:nth-child(4) { animation-delay: 0.4s; }
+.photo-card:nth-child(5) { animation-delay: 0.5s; }
+.photo-card:nth-child(6) { animation-delay: 0.6s; }
+
+.photo-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.photo-card:hover img {
+    filter: brightness(1.1);
+}
+
+.photo-info {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.photo-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-family: var(--font-heading);
+    color: var(--accent-orange);
+}
+
+.photo-info p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
+/* === Loading and Error States === */
+#error-message-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-message {
+    color: #f87171;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Loading Skeleton */
+.skeleton-card {
+    height: 280px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    animation: pulse-bg 1.5s infinite;
+}
+
+@keyframes pulse-bg {
+    0% { background-color: #30363d; }
+    50% { background-color: #444c56; }
+    100% { background-color: #30363d; }
+}
+
+/* === Photo Modal === */
+.photo-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-image {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    display: block;
+    animation: zoom-in 0.3s ease-out;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+    border: 2px solid var(--accent-orange);
+}
+
+@keyframes zoom-in {
+    from {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--accent-orange);
+    text-decoration: none;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    .controls-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .control-group {
+        width: 100%;
+    }
+    #fetch-button {
+        align-self: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
